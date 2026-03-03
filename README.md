@@ -1,6 +1,6 @@
-#  skills
+#  awesome skills
 
-我的skills book，用于收藏经常使用的高质量的skill。
+skills book，用于收藏经常使用的高质量的skill。
 用于快速查找和学习，以及分享。
 
 
