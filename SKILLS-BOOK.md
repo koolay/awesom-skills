@@ -12,7 +12,8 @@
 2. [softaworks/agent-toolkit](#softaworksagent-toolkit)
 3. [sickn33/antigravity-awesome-skills](#sickn33antigravity-awesome-skills)
 4. [Yeachan-Heo/oh-my-claudecode](#yeachan-heooh-my-claudecode)
-5. [快速参考](#快速参考)
+5. [parcadei/continuous-claude-v3](#parcadeicontinuous-claude-v3)
+6. [快速参考](#快速参考)
 
 ---
 
@@ -23,6 +24,7 @@
 | **softaworks/agent-toolkit** | 50+ | 面向开发、文档、规划和专业工作流的精品技能 |
 | **sickn33/antigravity-awesome-skills** | 960+ | 适用于所有 AI 编程助手的通用技能终极集合 |
 | **Yeachan-Heo/oh-my-claudecode** | 35+ 命令，21 个代理 | 零学习曲线的多代理编排系统 |
+| **parcadei/continuous-claude-v3** | 109 技能，32 代理，30 钩子 | 持久化、可学习、多代理开发环境 |
 
 ---
 
@@ -658,6 +660,11 @@ TDD、测试设计、修复、QA 工作流
 /plugin marketplace add https://github.com/Yeachan-Heo/oh-my-claudecode
 /plugin install oh-my-claudecode
 /omc-setup
+
+# parcadei/continuous-claude-v3
+git clone https://github.com/parcadei/Continuous-Claude-v3.git
+cd Continuous-Claude-v3/opc
+uv run python -m scripts.setup.wizard
 ```
 
 ### 斜杠命令 (35+)
@@ -755,6 +762,11 @@ npx skills add sickn33/antigravity-awesome-skills
 /plugin marketplace add https://github.com/Yeachan-Heo/oh-my-claudecode
 /plugin install oh-my-claudecode
 /omc-setup
+
+# parcadei/continuous-claude-v3
+git clone https://github.com/parcadei/Continuous-Claude-v3.git
+cd Continuous-Claude-v3/opc
+uv run python -m scripts.setup.wizard
 ```
 
 ### 技能数量摘要
@@ -764,6 +776,7 @@ npx skills add sickn33/antigravity-awesome-skills
 | softaworks/agent-toolkit | 50+ | 6 | 7 |
 | sickn33/antigravity-awesome-skills | 960+ | - | - |
 | Yeachan-Heo/oh-my-claudecode | - | 21 | 35+ |
+| parcadei/continuous-claude-v3 | 109+ | 32 | 30 |
 
 ### 热门分类 (Antigravity)
 
@@ -877,6 +890,532 @@ spawner_load({ skill_id: "telegram-bot-builder" })
 访问 **[spawner.vibeship.co/skills](https://spawner.vibeship.co/skills)** 查看交互式目录。
 
 完整技能列表请查看：[VIBESHIP-SKILLS.md](VIBESHIP-SKILLS.md)
+
+---
+
+## parcadei/continuous-claude-v3
+
+**仓库**: https://github.com/parcadei/Continuous-Claude-v3
+
+**技能总数**: 109+ | **代理**: 32 | **钩子**: 30
+
+**安装**:
+```bash
+# 克隆项目
+git clone https://github.com/parcadei/Continuous-Claude-v3.git
+cd Continuous-Claude-v3/opc
+
+# 运行设置向导（12 步）
+uv run python -m scripts.setup.wizard
+```
+
+> **注意**: `pyproject.toml` 在 `opc/` 目录中。始终从 `opc/` 目录运行 `uv` 命令。
+
+### 核心理念
+
+**Continuous Claude** 将 Claude Code 转变为一个持续学习的系统，在会话间维护上下文，编排专业代理，并通过智能代码分析消除 token 浪费。
+
+| 问题 | 解决方案 |
+|------|----------|
+| 上下文压缩时丢失信息 | YAML 交接 - 更高效的 token 传输 |
+| 每次会话从头开始 | 记忆系统召回 + 守护进程自动提取学习内容 |
+| 读取整个文件消耗 token | 5 层代码分析 + 语义索引 |
+| 复杂任务需要协调 | 元技能编排代理工作流 |
+| 手动重复工作流 | 109 个技能，自然语言触发 |
+
+**座右铭：复合，不要压缩。** 自动提取学习内容，然后以完整上下文重新开始。
+
+---
+
+### 元技能（工作流编排器）
+
+| 元技能 | 链式流程 | 使用时机 |
+|--------|----------|----------|
+| `/workflow` | 路由 → 适当的工作流 | 不知道从哪里开始 |
+| `/build` | discovery → plan → validate → implement → commit | 构建功能 |
+| `/fix` | sleuth → premortem → kraken → test → commit | 修复 bug |
+| `/tdd` | plan → arbiter (tests) → kraken (implement) → arbiter | 测试优先开发 |
+| `/refactor` | phoenix → plan → kraken → reviewer → arbiter | 安全代码转换 |
+| `/review` | 并行专业审查 → 综合 | 代码审查 |
+| `/explore` | scout (quick/deep/architecture) | 理解代码库 |
+| `/security` | 漏洞扫描 → 验证 | 安全审计 |
+| `/release` | audit → E2E → review → changelog | 发布版本 |
+
+---
+
+### 核心技能
+
+#### 会话管理
+
+| 技能 | 描述 |
+|------|------|
+| `create_handoff` | 创建 YAML 格式的会话交接文档，保存状态和上下文 |
+| `resume_handoff` | 恢复之前的会话交接，加载保存的状态 |
+| `continuity_ledger` | 维护连续性分类账，跟踪会话状态 |
+| `complete-skill` | 标记任务完成并触发学习提取 |
+| `completion-check` | 检查任务完成状态 |
+
+#### 代码分析
+
+| 技能 | 描述 |
+|------|------|
+| `tldr-code` | 使用 TLDR 5 层分析压缩代码表示（节省 95% token） |
+| `tldr-deep` | 深度 TLDR 分析，包含更多上下文 |
+| `tldr-overview` | 代码库概览 TLDR |
+| `tldr-router` | 智能路由到适当的 TLDR 技能 |
+| `tldr-stats` | 代码统计和指标 |
+| `ast-grep-find` | 使用 ast-grep 进行 AST 级别代码搜索 |
+| `dead-code` | 检测和分析死代码 |
+
+#### 开发与调试
+
+| 技能 | 描述 |
+|------|------|
+| `build` | 构建工作流技能 |
+| `fix` | 调试和修复工作流 |
+| `debug` | 通用调试技能 |
+| `debug-hooks` | 调试钩子问题 |
+| `commit` | 高质量的 git 提交 |
+| `git-commits` | git 提交管理 |
+| `describe_pr` | 生成 PR 描述 |
+| `implement_plan` | 实现计划 |
+| `implement_plan_micro` | 微任务实现 |
+| `implement_task` | 任务实现 |
+
+#### 规划与设计
+
+| 技能 | 描述 |
+|------|------|
+| `plan-agent` | 创建详细的实现计划 |
+| `premortem` | 实施前风险分析 |
+| `discovery-interview` | 需求澄清访谈 |
+| `explore` | 代码库探索 |
+
+#### 重构与质量
+
+| 技能 | 描述 |
+|------|------|
+| `refactor` | 代码重构工作流 |
+| `review` | 代码审查 |
+| `qlty-check` | 质量检查 |
+| `qlty-during-development` | 开发过程中的质量保证 |
+| `validate-agent` | 验证代理输出 |
+
+#### 研究与学习
+
+| 技能 | 描述 |
+|------|------|
+| `research` | 代码库研究 |
+| `research-agent` | 研究代理 |
+| `research-external` | 外部研究 |
+| `recall` | 记忆召回 |
+| `recall-reasoning` | 基于记忆的推理 |
+| `remember` | 保存学习内容 |
+| `compound-learnings` | 复合学习内容 |
+
+#### 数学技能
+
+| 技能 | 描述 |
+|------|------|
+| `math-help` | 数学帮助 |
+| `math-router` | 数学路由 |
+| `math-unified` | 统一数学技能 |
+| `prove` | 证明辅助 |
+| `pint-compute` | 单位计算 |
+| `shapely-compute` | 几何计算 |
+
+**数学子技能**:
+- 实分析：极限、连续性、收敛性
+- 复分析：解析函数、轮廓积分、留数
+- 线性代数：向量空间、矩阵、特征值
+- 抽象代数：群、环、域
+- 拓扑：开集、紧致性、连通性
+- 测度论：σ-代数、Lebesgue 测度、积分论
+- 数理逻辑：命题逻辑、谓词逻辑、证明论
+- 常微分方程和偏微分方程
+- 数值方法：插值、数值积分、求根
+- 优化：梯度方法、约束优化、凸优化
+- 泛函分析：Banach 空间、Hilbert 空间、算子理论
+- 信息论：熵、信道容量、信源编码
+- 图论与数论
+- 范畴论：范畴与函子、自然变换、极限与余极限
+
+#### Agent 相关
+
+| 技能 | 描述 |
+|------|------|
+| `agent-orchestration` | 代理编排 |
+| `agentic-workflow` | 代理工作流 |
+| `agent-context-isolation` | 代理上下文隔离 |
+| `parallel-agents` | 并行代理 |
+| `parallel-agent-contracts` | 并行代理契约 |
+| `sub-agents` | 子代理管理 |
+| `background-agent-pings` | 后台代理心跳 |
+| `no-polling-agents` | 无轮询代理模式 |
+
+#### Agentica（多代理框架）
+
+| 技能 | 描述 |
+|------|------|
+| `agentica-claude-proxy` | Agentica Claude 代理 |
+| `agentica-infrastructure` | Agentica 基础设施 |
+| `agentica-prompts` | Agentica 提示词 |
+| `agentica-sdk` | Agentica SDK |
+| `agentica-server` | Agentica 服务器 |
+| `agentica-spawn` | Agentica 生成 |
+
+#### 搜索与信息检索
+
+| 技能 | 描述 |
+|------|------|
+| `search-hierarchy` | 搜索层级 |
+| `search-router` | 搜索路由 |
+| `search-tools` | 搜索工具 |
+| `loogle-search` | Loogle 搜索 |
+| `firecrawl-scrape` | Firecrawl 爬取 |
+| `perplexity-search` | Perplexity 搜索 |
+| `github-search` | GitHub 搜索 |
+
+#### 钩子与系统
+
+| 技能 | 描述 |
+|------|------|
+| `hooks` | 钩子系统 |
+| `hook-developer` | 钩子开发 |
+| `session_start-recall` | 会话开始时召回记忆 |
+| `working_on` | 工作状态跟踪 |
+
+#### 代码质量与规范
+
+| 技能 | 描述 |
+|------|------|
+| `modular-code` | 模块化代码 |
+| `observe-before-editing` | 编辑前观察 |
+| `index-at-creation` | 创建时索引 |
+| `graceful-degradation` | 优雅降级 |
+| `idempotent-redundancy` | 幂等冗余 |
+| `explicit-identity` | 显式身份 |
+
+#### 文档与帮助
+
+| 技能 | 描述 |
+|------|------|
+| `help` | 帮助技能 |
+| `tour` | 项目导览 |
+| `system_overview` | 系统概览 |
+| `onboard` | 入职引导 |
+| `cli-reference` | CLI 参考 |
+| `repoprompt` | 仓库提示生成 |
+| `repo-research-analyst` | 仓库研究分析师 |
+
+#### 高级技能
+
+| 技能 | 描述 |
+|------|------|
+| `mot` | 元操作理论 |
+| `wiring` | 系统连接 |
+| `migrate` | 迁移技能 |
+| `mcp-chaining` | MCP 链接 |
+| `mcp-scripts` | MCP 脚本 |
+| `morph-apply` | 形态应用 |
+| `morph-search` | 形态搜索 |
+| `reference-sdk` | 参考 SDK |
+| `release` | 发布管理 |
+| `tdd` | 测试驱动开发 |
+| `tdd-migrate` | TDD 迁移 |
+| `tdd-migration-pipeline` | TDD 迁移流水线 |
+| `test` | 测试技能 |
+| `security` | 安全技能 |
+| `workflow-router` | 工作流路由 |
+| `slash-commands` | 斜杠命令 |
+| `skill-developer` | 技能开发 |
+| `skill-development` | 技能发展 |
+| `skill-upgrader` | 技能升级 |
+| `opc-architecture` | OPC 架构 |
+
+#### Braintrust（追踪与分析）
+
+| 技能 | 描述 |
+|------|------|
+| `braintrust-tracing` | Braintrust 追踪 |
+| `braintrust-analyze` | Braintrust 分析 |
+
+#### 遗留/归档技能
+
+| 技能 | 状态 |
+|------|------|
+| `router-first-architecture` | 归档 |
+| `async-repl-protocol` | 归档 |
+| `leann-search` | 归档 |
+
+---
+
+### 代理系统 (32 Agents)
+
+| 代理 | 描述 |
+|------|------|
+| `aegis` | 安全防护代理 |
+| `agentica-agent` | Agentica 专用代理 |
+| `arbiter` | 测试验证代理 |
+| `architect` | 架构设计代理 |
+| `atlas` | 文档和知识代理 |
+| `braintrust-analyst` | Braintrust 数据分析 |
+| `chronicler` | 记录和文档代理 |
+| `context-query-agent` | 上下文查询代理 |
+| `critic` | 关键分析和反馈 |
+| `debug-agent` | 专业调试代理 |
+| `herald` | 通知和通信代理 |
+| `judge` | 代码质量评审 |
+| `kraken` | 主要执行代理 |
+| `liaison` | 联络和协调代理 |
+| `maestro` | 编排指挥代理 |
+| `memory-extractor` | 记忆提取代理 |
+| `onboard` | 入职引导代理 |
+| `oracle` | 研究和分析代理 |
+| `pathfinder` | 路径查找代理 |
+| `phoenix` | 重构和现代化代理 |
+| `plan-agent` | 规划代理 |
+| `plan-reviewer` | 计划审查代理 |
+| `profiler` | 性能分析代理 |
+| `research-codebase` | 代码库研究代理 |
+| `review-agent` | 代码审查代理 |
+| `scout` | 探索和侦察代理 |
+| `scribe` | 文档编写代理 |
+| `sentinel` | 监控和守护代理 |
+| `session-analyst` | 会话数据分析 |
+| `sleuth` | 调查和诊断代理 |
+| `spark` | 创意和头脑风暴代理 |
+| `surveyor` | 测量和评估代理 |
+| `validate-agent` | 验证代理 |
+| `warden` | 代码质量和规范代理 |
+
+---
+
+### 钩子系统 (30 Hooks)
+
+钩子在特定事件时自动触发，注入上下文和执行验证。
+
+#### 会话生命周期钩子
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `session-start-continuity` | 会话开始 | 加载连续性分类账和交接 |
+| `session-start-recall` | 会话开始 | 召回相关记忆 |
+| `session-start-tldr-cache` | 会话开始 | 加载 TLDR 缓存 |
+| `session-start-dead-code` | 会话开始 | 死代码检测初始化 |
+| `session-register` | 会话开始 | 注册会话到数据库 |
+| `session-end-cleanup` | 会话结束 | 清理和保存状态 |
+| `session-outcome` | 会话结束 | 记录会话结果 |
+| `session-symbol-index` | 会话期间 | 符号索引构建 |
+
+#### 编译时钩子
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `pre-compact-continuity` | 压缩前 | 自动交接前上下文压缩 |
+| `pre-tool-use` | 工具使用前 | 工具使用验证 |
+| `pre-tool-use-broadcast` | 工具使用前 | 广播工具使用事件 |
+| `pre-edit-context` | 编辑前 | 注入编辑上下文 |
+| `edit-context-inject` | 编辑时 | 编辑上下文注入 |
+| `post-tool-use` | 工具使用后 | 工具使用后处理 |
+| `post-task-complete` | 任务完成 | 任务完成处理 |
+| `post-edit-notify` | 编辑后 | 编辑后通知 |
+| `post-edit-diagnostics` | 编辑后 | 编辑后诊断 |
+
+#### 技能和代理钩子
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `skill-activation-prompt` | 用户消息 | 注入技能激活建议 |
+| `skill-context-inject` | 技能激活 | 注入技能上下文 |
+| `skill-validation-prompt` | 技能使用 | 技能验证 |
+| `skill-router` | 用户消息 | 路由到适当技能 |
+| `agent-state-broadcast` | 代理事件 | 广播代理状态 |
+| `subagent-start` | 子代理启动 | 子代理启动处理 |
+| `subagent-stop` | 子代理停止 | 子代理停止处理 |
+| `subagent-learning` | 子代理停止 | 从子代理提取学习 |
+
+#### 代码质量钩子
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `compiler-in-the-loop` | 编辑后 | 编译器验证 |
+| `compiler-in-the-loop-stop` | 子代理停止 | 编译后验证 |
+| `typescript-preflight` | TypeScript 编辑 | TypeScript 预检查 |
+| `import-validator` | 编辑后 | 导入验证 |
+| `import-error-detector` | 编辑后 | 导入错误检测 |
+| `file-claims` | 文件操作 | 文件声明跟踪 |
+| `path-rules` | 文件访问 | 路径规则执行 |
+| `impact-refactor` | 重构前 | 评估重构影响 |
+
+#### 记忆和学习钩子
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `memory-awareness` | 会话期间 | 记忆系统感知 |
+| `auto-handoff-stop` | 会话结束 | 自动创建交接 |
+| `handoff-index` | 交接创建 | 交接索引 |
+| `user-confirm-learning` | 学习提取 | 用户确认学习内容 |
+
+#### 工作流和模式钩子
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `pattern-orchestrator` | 工作流 | 编排设计模式 |
+| `composition-gate` | 工作流 | 组合模式门控 |
+| `phase-gate` | 工作流 | 阶段门控 |
+| `explorer-to-scout` | 探索 | 探索到侦察转换 |
+| `erotetic-clarification` | 需求模糊 | 苏格拉底式澄清 |
+| `signature-helper` | 签名检测 | 签名变更检测 |
+| `spec-anchor` | 规范编辑 | 规范锚定 |
+| `spec-intent-detector` | 规范编辑 | 规范意图检测 |
+
+#### 资源管理钩子
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `resource-gate` | 资源访问 | 资源访问门控 |
+| `arch-context-inject` | 架构操作 | 架构上下文注入 |
+
+#### 守护进程和后台任务
+
+| 钩子 | 触发时机 | 描述 |
+|------|----------|------|
+| `heartbeat` | 定期 | 会话心跳 |
+| `drift-detector` | 定期 | 上下文漂移检测 |
+| `transcript-parser` | 会话结束 | 转录解析 |
+| `tldr-context-inject` | 读取文件 | TLDR 上下文注入 |
+| `tldr-rebuild-prompt` | 代码变更 | TLDR 重建 |
+| `tldr-read-enforcer` | 读取文件 | 强制使用 TLDR |
+
+---
+
+### TLDR 5 层代码分析
+
+TLDR (Token-Light Document Representation) 是一个 5 层代码分析系统，可将代码表示压缩 95%。
+
+| 层级 | 名称 | Token 数 | 内容 |
+|------|------|---------|------|
+| L1 | AST | ~500 | 函数、类、签名 |
+| L2 | 调用图 | +440 | 跨文件依赖 |
+| L3 | 控制流图 | +110 | 控制流 |
+| L4 | 数据流图 | +130 | 数据流 |
+| L5 | 程序依赖图 | +150 | 切片 |
+
+**总计**: ~1,200 tokens vs 23,000 原始 tokens = **95% 节省**
+
+---
+
+### 记忆系统
+
+使用 PostgreSQL + pgvector 的记忆系统：
+
+| 表 | 描述 |
+|-----|------|
+| `sessions` | 会话心跳跟踪 |
+| `file_claims` | 文件锁和声明 |
+| `archival_memory` | 使用 BGE 嵌入的归档记忆 |
+| `handoffs` | 嵌入的会话交接 |
+
+---
+
+### 技能激活系统
+
+当用户发送消息时，钩子注入上下文，告诉 Claude 哪些技能和代理是相关的。
+
+```
+> "修复登录 bug"
+
+🎯 技能激活检查
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ 关键技能 (必需):
+  → create_handoff
+
+📚 推荐技能:
+  → fix
+  → debug
+
+🤖 推荐代理 (token 高效):
+  → debug-agent
+  → scout
+
+动作：使用 Skill 工具在响应前
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+#### 优先级级别
+
+| 级别 | 含义 |
+|------|------|
+| ⚠️ **关键** | 必须使用（如会话结束前的交接） |
+| 📚 **推荐** | 应该使用（如工作流技能） |
+| 💡 **建议** | 考虑使用（如优化工具） |
+| 📌 **可选** | 最好有（如文档助手） |
+
+---
+
+### 工作流链示例
+
+```
+/fix bug                              /build greenfield
+─────────                             ─────────────────
+┌──────────┐  ┌──────────┐            ┌──────────┐  ┌──────────┐
+│  sleuth  │─▶│ premortem│            │discovery │─▶│plan-agent│
+│(诊断)    │  │  (风险)  │            │(澄清)    │  │ (设计)   │
+└──────────┘  └────┬─────┘            └──────────┘  └────┬─────┘
+                   │                                      │
+                   ▼                                      ▼
+            ┌──────────┐                          ┌──────────┐
+            │  kraken  │                          │ validate │
+            │  (修复)  │                          │ (检查)   │
+            └────┬─────┘                          └────┬─────┘
+                 │                                      │
+                 ▼                                      ▼
+            ┌──────────┐                          ┌──────────┐
+            │  arbiter │                          │  kraken  │
+            │ (测试)   │                          │(实现)    │
+            └────┬─────┘                          └────┬─────┘
+                 │                                      │
+                 ▼                                      ▼
+            ┌──────────┐                          ┌──────────┐
+            │  commit  │                          │  commit  │
+            └──────────┘                          └──────────┘
+```
+
+---
+
+### 配置
+
+设置环境变量：
+
+```bash
+# 数据库连接
+export CONTINUOUS_CLAUDE_DB_URL="postgresql://user:password@localhost:5432/continuous_claude"
+
+# 可选：Perplexity API
+export PERPLEXITY_API_KEY="..."
+
+# 可选：NIA API
+export NIA_API_KEY="..."
+```
+
+---
+
+### 快速参考摘要
+
+| 仓库 | 技能 | 代理 | 钩子 |
+|------|------|------|------|
+| parcadei/continuous-claude-v3 | 109+ | 32 | 30 |
+
+### 核心特色
+
+1. **TLDR 代码分析** - 5 层分析节省 95% token
+2. **会话连续性** - YAML 交接保持上下文
+3. **记忆系统** - PostgreSQL + pgvector 持久化
+4. **自然语言触发** - 无需记忆命令
+5. **30 个钩子** - 自动注入上下文和验证
+6. **32 个专业代理** - 编排复杂任务
 
 ---
 
