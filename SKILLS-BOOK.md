@@ -777,4 +777,107 @@ npx skills add sickn33/antigravity-awesome-skills
 
 ---
 
-*Generated with Claude Code \| Skills Book v1.0 (Chinese Edition)*
+## vibeforge1111/vibeship-spawner-skills
+
+**仓库**: https://github.com/vibeforge1111/vibeship-spawner-skills
+
+**技能总数**: 462+
+
+**安装**:
+```bash
+# 完整安装（包含 MCP 服务器）
+npx github:vibeforge1111/vibeship-spawner-skills install --mcp
+
+# 仅安装技能
+npx github:vibeforge1111/vibeship-spawner-skills install
+
+# 更新技能
+npx github:vibeforge1111/vibeship-spawner-skills update
+```
+
+### 四文件技能系统
+
+Spawner Skills 使用独特的 4 文件结构，每个技能包含：
+
+```
+maker/micro-saas-launcher/
+├── skill.yaml          # 身份、模式、反模式、交接
+├── sharp-edges.yaml    # 陷阱和警告
+├── validations.yaml    # 自动化代码质量检查
+└── collaboration.yaml  # 技能协作配置
+```
+
+| 特性 | 普通提示词 | Spawner Skills |
+|------|-----------|---------------|
+| **模式** | 通用建议 | 经过验证的实现代码 |
+| **反模式** | 无 | "不要这样做因为..." + 替代方案 |
+| **陷阱警告** | 无 | 自动检测的陷阱 |
+| **验证** | 无 | 正则表达式检查错误 |
+| **协作** | 无 | 技能互相委托 |
+| **严重程度** | 无 | 关键、高、中、低 |
+
+### 技能类别 (35 categories)
+
+| 类别 | 技能数 | 描述 |
+|------|--------|------|
+| **AI & ML** | 59 | LLM 架构、RAG、微调、多模态 AI |
+| **AI Agents** | 23 | 自主代理、多代理编排、MCP |
+| **AI Tools** | 12 | 代码生成、图像/视频/音频处理 |
+| **Game Dev** | 51 | Unity、Godot、游戏设计、3D 建模 |
+| **Marketing** | 36 | 内容策略、SEO、病毒式营销 |
+| **Integrations** | 25 | Stripe、AWS、Discord、Slack 等 |
+| **Strategy** | 24 | 产品战略、融资、市场竞争 |
+| **DevOps** | 22 | K8s、Docker、CI/CD、监控 |
+| **Backend** | 21 | API、微服务、缓存、实时通信 |
+| **Blockchain** | 20 | 智能合约、DeFi、NFT、Solana |
+| **Security** | 13 | OAuth、加密、渗透测试 |
+| **Design** | 12 | UI/UX、品牌、无障碍设计 |
+| **Frameworks** | 12 | Next.js、React、Svelte、Tailwind |
+| **Community** | 11 | Discord、Telegram、开发者社区 |
+| **Data** | 11 | PostgreSQL、Redis、向量数据库 |
+| **Maker** | 11 | 病毒生成器、Telegram Bot、扩展 |
+| **Mind** | 10 | 调试、决策、系统设计 |
+| **Development** | 9 | 文档、性能、CLI、SDK |
+| **Frontend** | 8 | 状态管理、表单、PWA |
+| **Testing** | 8 | 测试架构、E2E、性能测试 |
+| **Education** | 7 | 课程创建、直播教学 |
+| **Product** | 7 | A/B 测试、分析、用户研究 |
+| **Biotech** | 6 | 基因组学、药物发现 |
+| **Enterprise** | 6 | 合规、数据治理 |
+| **Finance** | 6 | 算法交易、投资组合 |
+| **Hardware** | 6 | 嵌入式、ROS2、FPGA |
+| **Trading** | 6 | 执行算法、量化研究 |
+| **Climate** | 5 | 碳足迹、能源优化 |
+| **Communications** | 5 | 技术演讲、投资者沟通 |
+| **Legal** | 5 | GDPR、合同、专利 |
+| **Simulation** | 5 | 蒙特卡洛、数字孪生 |
+| **Space** | 5 | 轨道力学、任务规划 |
+| **Science** | 4 | 实验设计、统计学 |
+| **Startup** | 3 | YC 最佳实践、创始人模式 |
+| **Creative** | 23 | 梗图、游戏化、病毒钩子 |
+
+### 使用技能
+
+#### 在 Claude 中加载技能
+```bash
+# 让 Claude 读取技能文件
+Read: ~/.spawner/skills/maker/micro-saas-launcher/skill.yaml
+```
+
+#### 使用 MCP 工具
+```bash
+# 搜索技能
+spawner_skills({ query: "telegram bot" })
+
+# 加载特定技能
+spawner_load({ skill_id: "telegram-bot-builder" })
+```
+
+#### 在线浏览
+访问 **[spawner.vibeship.co/skills](https://spawner.vibeship.co/skills)** 查看交互式目录。
+
+完整技能列表请查看：[VIBESHIP-SKILLS.md](VIBESHIP-SKILLS.md)
+
+---
+
+*Generated with Claude Code | Skills Book v1.0 (Chinese Edition)*
