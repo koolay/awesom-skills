@@ -14,7 +14,8 @@
 4. [Yeachan-Heo/oh-my-claudecode](#yeachan-heooh-my-claudecode)
 5. [parcadei/continuous-claude-v3](#parcadeicontinuous-claude-v3)
 6. [phuryn/pm-skills](#phurynpm-skills)
-7. [快速参考](#快速参考)
+7. [bmad-code-org/BMAD-METHOD](#bmad-code-orgbmad-method)
+8. [快速参考](#快速参考)
 
 ---
 
@@ -27,6 +28,7 @@
 | **Yeachan-Heo/oh-my-claudecode** | 35+ 命令，21 个代理 | 零学习曲线的多代理编排系统 |
 | **parcadei/continuous-claude-v3** | 109 技能，32 代理，30 钩子 | 持久化、可学习、多代理开发环境 |
 | **phuryn/pm-skills** | 65 技能，36 工作流 | 产品经理全流程技能库（发现/策略/执行/增长） |
+| **bmad-code-org/BMAD-METHOD** | 10 技能，34+ 工作流 | AI 驱动的精敏捷开发框架，具有规模自适应智能和 12+ 专业代理 |
 
 ---
 
@@ -1633,6 +1635,76 @@ done
 ---
 
 **技能来源**: 由 [The Product Compass Newsletter](https://www.productcompass.pm) 策划，基于 Teresa Torres、Marty Cagan、Alberto Savoia 等专家的作品。
+
+---
+
+## bmad-code-org/BMAD-METHOD
+
+**仓库**: https://github.com/bmad-code-org/BMAD-METHOD
+
+**安装**:
+```bash
+npx bmad-method install
+```
+
+> 如果遇到 beta 版本问题，使用：`npx bmad-method@6.0.1 install`
+
+### 概述
+
+BMAD-METHOD 是一个 AI 驱动的敏捷开发框架，具有规模自适应智能，可从 Bug 修复调整到企业级系统。
+
+- **AI 智能帮助** — 随时使用 `/bmad-help` 获取下一步指导
+- **规模领域自适应** — 根据项目复杂度自动调整规划深度
+- **结构化工作流** — 基于敏捷最佳实践，涵盖分析、规划、架构和实现
+- **专业代理** — 12+ 领域专家（PM、架构师、开发者、UX、Scrum Master 等）
+- **Party Mode** — 多代理协作讨论模式
+- **完整生命周期** — 从头脑风暴到部署
+
+### BMad OS 技能 (10 技能)
+
+| 技能 | 描述 |
+|------|------|
+| `bmad-os-audit-file-refs` | 使用并行 Haiku 子代理审计 BMAD 源文件的文件引用规范违规 |
+| `bmad-os-changelog-social` | 从最新 changelog 生成 Discord、Twitter、LinkedIn 社交媒体公告 |
+| `bmad-os-diataxis-style-fix` | 修复文档以符合 Diataxis 框架和 BMad Method 风格指南 |
+| `bmad-os-draft-changelog` | 分析自上次发布以来的变更并更新 CHANGELOG.md |
+| `bmad-os-findings-triage` | 使用并行代理编排 HITL 审查发现分类 |
+| `bmad-os-gh-triage` | 分析所有 GitHub issues，进行分类处理 |
+| `bmad-os-release-module` | 执行版本 bump、git tag、npm 发布、GitHub release |
+| `bmad-os-review-pr` | 双层 PR 审查工具（Raven's Verdict），并行运行对抗性审查和边缘情况发现 |
+| `bmad-os-review-prompt` | 审查 LLM 工作流步骤提示词中的已知失败模式（PromptSentinel v1.2） |
+| `bmad-os-root-cause-analysis` | 分析 Bug 修复 commit/PR 并生成结构化根本原因分析报告 |
+
+### 核心工作流 (34+)
+
+BMad Method 包含 34+ 结构化工作流，覆盖完整开发周期：
+
+- **需求分析** — 用户故事、验收标准、干系人映射
+- **架构设计** -系统架构、技术选型、风险评估
+- **开发实现** — 代码生成、重构、测试驱动开发
+- **代码审查** — 自动化 PR 审查、安全审计
+- **发布管理** — Changelog 生成、版本发布、社交公告
+
+### 使用方式
+
+```bash
+# 安装后在 AI IDE 中使用
+/bmad-help  # 获取下一步指导
+```
+
+**文档**:
+- [完整文档](https://docs.bmad-method.org)
+- [入门教程](https://docs.bmad-method.org/tutorials/getting-started/)
+- [升级指南](https://docs.bmad-method.org/how-to/upgrade-to-v6/)
+
+**模块生态**:
+| 模块 | 描述 |
+|------|------|
+| **BMad Method (BMM)** | 核心框架，34+ 工作流 |
+| **BMad Builder (BMB)** | 创建自定义 BMad 代理和工作流 |
+| **Test Architect (TEA)** | 基于风险的测试策略和自动化 |
+| **Game Dev Studio (BMGD)** | 游戏开发工作流（Unity、Unreal、Godot） |
+| **Creative Intelligence Suite (CIS)** | 创新、头脑风暴、设计思维 |
 
 ---
 
