@@ -13,6 +13,7 @@ skills book，用于收藏经常使用的高质量的skill。
 | **Yeachan-Heo/oh-my-claudecode** | 35+ 命令，21 个代理 | 零学习曲线的多代理编排系统 | `npx skills add Yeachan-Heo/oh-my-claudecode` |
 | **parcadei/continuous-claude-v3** | 109 技能，32 代理，30 钩子 | 持久化、可学习、多代理开发环境 | `git clone https://github.com/parcadei/Continuous-Claude-v3.git` |
 | **phuryn/pm-skills** | 65 技能，36 工作流 | 产品经理全流程技能库（发现/策略/执行/增长） | `claude plugin marketplace add phuryn/pm-skills` |
+| **bmad-code-org/BMAD-METHOD** | 10 技能，34+ 工作流 | AI 驱动的敏捷开发框架，规模自适应智能 +12+ 专业代理 | `npx bmad-method install` |
 | **vibeforge1111/vibeship-spawner-skills** | 462+ | 独特的 4 文件技能系统，涵盖 AI、游戏开发、营销等 35 个类别 | `npx github:vibeforge1111/vibeship-spawner-skills install` |
 
 ---
@@ -43,6 +44,12 @@ skills book，用于收藏经常使用的高质量的skill。
 - **GitHub**: https://github.com/phuryn/pm-skills
 - **技能类型**: 产品发现、产品策略、执行、市场研究、数据分析、营销增长
 - **代表技能**: `pm-product-discovery`, `pm-product-strategy`, `pm-execution`
+
+### bmad-code-org/BMAD-METHOD
+- **GitHub**: https://github.com/bmad-code-org/BMAD-METHOD
+- **技能类型**: BMad OS 技能、敏捷开发工作流、代码审查、发布管理
+- **代表技能**: `bmad-os-review-pr`, `bmad-os-review-prompt`, `bmad-os-changelog-social`, `bmad-os-root-cause-analysis`
+- **文档**: https://docs.bmad-method.org
 
 ### vibeforge1111/vibeship-spawner-skills
 - **GitHub**: https://github.com/vibeforge1111/vibeship-spawner-skills
