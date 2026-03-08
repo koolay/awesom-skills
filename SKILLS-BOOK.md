@@ -13,7 +13,8 @@
 3. [sickn33/antigravity-awesome-skills](#sickn33antigravity-awesome-skills)
 4. [Yeachan-Heo/oh-my-claudecode](#yeachan-heooh-my-claudecode)
 5. [parcadei/continuous-claude-v3](#parcadeicontinuous-claude-v3)
-6. [快速参考](#快速参考)
+6. [phuryn/pm-skills](#phurynpm-skills)
+7. [快速参考](#快速参考)
 
 ---
 
@@ -25,6 +26,7 @@
 | **sickn33/antigravity-awesome-skills** | 960+ | 适用于所有 AI 编程助手的通用技能终极集合 |
 | **Yeachan-Heo/oh-my-claudecode** | 35+ 命令，21 个代理 | 零学习曲线的多代理编排系统 |
 | **parcadei/continuous-claude-v3** | 109 技能，32 代理，30 钩子 | 持久化、可学习、多代理开发环境 |
+| **phuryn/pm-skills** | 65 技能，36 工作流 | 产品经理全流程技能库（发现/策略/执行/增长） |
 
 ---
 
@@ -1416,6 +1418,221 @@ export NIA_API_KEY="..."
 4. **自然语言触发** - 无需记忆命令
 5. **30 个钩子** - 自动注入上下文和验证
 6. **32 个专业代理** - 编排复杂任务
+
+---
+
+---
+
+## phuryn/pm-skills
+
+**仓库**: https://github.com/phuryn/pm-skills
+
+**安装** (Claude Cowork):
+1. 打开 **Customize** (左下角)
+2. 进入 **Browse plugins** → **Personal** → **+**
+3. 选择 **Add marketplace from GitHub**
+4. 输入：`phuryn/pm-skills`
+
+**安装** (Claude Code CLI):
+```bash
+# 添加市场
+claude plugin marketplace add phuryn/pm-skills
+
+# 安装单个插件
+claude plugin install pm-toolkit@pm-skills
+claude plugin install pm-product-strategy@pm-skills
+claude plugin install pm-product-discovery@pm-skills
+claude plugin install pm-market-research@pm-skills
+claude plugin install pm-data-analytics@pm-skills
+claude plugin install pm-marketing-growth@pm-skills
+claude plugin install pm-go-to-market@pm-skills
+claude plugin install pm-execution@pm-skills
+```
+
+**其他 AI 助手** (仅技能):
+```bash
+# 复制所有技能到 Gemini CLI
+for plugin in pm-*/; do
+  cp -r "$plugin/skills/"* ~/.gemini/skills/ 2>/dev/null
+done
+```
+
+---
+
+### 1. pm-product-discovery — 创意、实验、假设测试、OST、访谈 (13 技能，5 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `brainstorm-ideas-existing` | 现有产品的多视角创意（PM、设计师、工程师） |
+| `brainstorm-ideas-new` | 新产品初期发现的创意生成 |
+| `brainstorm-experiments-existing` | 为现有产品设计假设验证实验 |
+| `brainstorm-experiments-new` | 为新产品设计精益创业预原型（Alberto Savoia） |
+| `identify-assumptions-existing` | 识别价值、可用性、可行性和技术可行性方面的风险假设 |
+| `identify-assumptions-new` | 识别 8 类风险假设（包括市场、战略、团队） |
+| `prioritize-assumptions` | 使用影响×风险矩阵优先排序假设 |
+| `prioritize-features` | 基于影响、工作量、风险和战略_alignment_优先排序功能 |
+| `analyze-feature-requests` | 分析和分类客户功能请求 |
+| `opportunity-solution-tree` | 构建机会解决方案树（Teresa Torres） |
+| `interview-script` | 创建结构化客户访谈脚本 |
+| `summarize-interview` | 将访谈记录总结为 JTBD、满意度信号和行动项 |
+| `metrics-dashboard` | 设计产品指标仪表盘 |
+
+**命令**:
+- `/discover` — 完整发现周期
+- `/brainstorm` — 多视角创意生成
+- `/triage-requests` — 分析功能请求
+- `/interview` — 准备/总结访谈
+- `/setup-metrics` — 设计产品指标仪表盘
+
+---
+
+### 2. pm-product-strategy — 愿景、商业模式、定价、竞争格局 (12 技能，5 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `product-strategy` | 完整的 9 部分产品策略画布 |
+| `startup-canvas` | 创业画布（产品策略 + 商业模式） |
+| `product-vision` | 制定鼓舞人心的产品愿景 |
+| `value-proposition` | 6 部分 JTBD 价值主张 |
+| `lean-canvas` | 精益画布商业模式 |
+| `business-model` | 商业模式画布（9 模块） |
+| `monetization-strategy` | 3-5 种变现策略头脑风暴 |
+| `pricing-strategy` | 定价模型、竞争分析、支付意愿 |
+| `swot-analysis` | SWOT 分析与可行建议 |
+| `pestle-analysis` | 宏观环境分析（政治、经济、社会、技术、法律、环境） |
+| `porters-five-forces` | 竞争力量分析 |
+| `ansoff-matrix` | 增长策略矩阵 |
+
+**命令**:
+- `/strategy` — 创建完整产品策略画布
+- `/business-model` — 探索商业模式
+- `/value-proposition` — 设计价值主张
+- `/market-scan` — 宏观环境分析
+- `/pricing` — 设计定价策略
+
+---
+
+### 3. pm-execution — PRD、OKR、路线图、冲刺、复盘、发布说明 (15 技能，10 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `create-prd` | 完整的 8 部分 PRD 模板 |
+| `brainstorm-okrs` | 与公司目标对齐的团队 OKR |
+| `outcome-roadmap` | 将功能列表转换为以结果为中心的路线图 |
+| `sprint-plan` | 冲刺规划（容量估算、故事选择、风险识别） |
+| `retro` | 结构化冲刺复盘 |
+| `release-notes` | 面向用户的发布说明 |
+| `pre-mortem` | 风险分析（老虎/纸老虎/大象分类） |
+| `stakeholder-map` | 权力×利益网格与沟通计划 |
+| `summarize-meeting` | 会议记录→决策 + 行动项 |
+| `user-stories` | 遵循 3C 和 INVEST 标准的用户故事 |
+| `job-stories` | Job 故事：当 [情境]，我想 [动机]，以便 [结果] |
+| `wwas` | 产品待办项（Why-What-Acceptance 格式） |
+| `test-scenarios` | 测试场景（快乐路径、边界情况、错误处理） |
+| `dummy-dataset` | 真实的虚拟数据集（CSV、JSON、SQL、Python） |
+| `prioritization-frameworks` | 9 种优先排序框架参考指南 |
+
+**命令**:
+- `/write-prd` — 创建 PRD
+- `/plan-okrs` — 头脑风暴 OKR
+- `/transform-roadmap` — 转换为以结果为中心的路线图
+- `/sprint` — 冲刺生命周期
+- `/pre-mortem` — 预先风险分析
+- `/meeting-notes` — 总结会议记录
+- `/stakeholder-map` — 绘制干系人地图
+- `/write-stories` — 拆分为待办项
+- `/test-scenarios` — 生成测试场景
+- `/generate-data` — 创建虚拟数据集
+
+---
+
+### 4. pm-market-research — 画像、细分、旅程地图、市场规模、竞品分析 (7 技能，3 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `user-personas` | 从研究数据创建用户画像 |
+| `market-segments` | 识别 3-5 个客户细分 |
+| `user-segmentation` | 基于行为和需求的用户细分 |
+| `customer-journey-map` | 端到端旅程地图 |
+| `market-sizing` | TAM、SAM、SOM（自上而下和自下而上） |
+| `competitor-analysis` | 竞争对手优势、劣势和差异化机会 |
+| `sentiment-analysis` | 用户反馈的情感分析和主题提取 |
+
+**命令**:
+- `/research-users` — 构建用户画像、旅程地图
+- `/competitive-analysis` — 分析竞争格局
+- `/analyze-feedback` — 用户反馈情感分析
+
+---
+
+### 5. pm-data-analytics — SQL 生成、队列分析、A/B 测试分析 (3 技能，3 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `sql-queries` | 从自然语言生成 SQL（BigQuery、PostgreSQL、MySQL） |
+| `cohort-analysis` | 留存曲线、功能采用率、队列参与度趋势 |
+| `ab-test-analysis` | 统计显著性、样本量验证、建议 |
+
+**命令**:
+- `/write-query` — 生成 SQL 查询
+- `/analyze-cohorts` — 队列分析
+- `/analyze-test` — 分析 A/B 测试结果
+
+---
+
+### 6. pm-go-to-market — 滩头细分市场、ICP、信息传递、增长循环、GTM 策略 (6 技能，3 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `gtm-strategy` | 完整 GTM 策略（渠道、信息、指标、发布计划） |
+| `beachhead-segment` | 识别首个滩头市场细分 |
+| `ideal-customer-profile` | ICP（人口统计、行为、JTBD、需求） |
+| `growth-loops` | 设计可持续增长循环（飞轮） |
+| `gtm-motions` | 评估 GTM 策略和工具 |
+| `competitive-battlecard` | 销售战斗卡（异议处理、获胜策略） |
+
+**命令**:
+- `/plan-launch` — 完整 GTM 策略
+- `/growth-strategy` — 设计增长循环
+- `/battlecard` — 创建竞争战斗卡
+
+---
+
+### 7. pm-marketing-growth — 营销创意、定位、价值主张、命名、北极星指标 (5 技能，2 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `marketing-ideas` | 创意、低成本营销创意 |
+| `positioning-ideas` | 差异化产品定位 |
+| `value-prop-statements` | 营销、销售和入职的价值主张陈述 |
+| `product-name` | 产品命名头脑风暴 |
+| `north-star-metric` | 北极星指标 + 输入指标 |
+
+**命令**:
+- `/market-product` — 营销创意、定位、价值主张
+- `/north-star` — 定义北极星指标
+
+---
+
+### 8. pm-toolkit — 简历审查、法律文件、校对 (4 技能，5 命令)
+
+| 技能 | 描述 |
+|------|------|
+| `review-resume` | PM 简历审查（XYZ+S 公式、关键词、结构） |
+| `draft-nda` | 保密协议 |
+| `privacy-policy` | GDPR/CCPA 合规隐私政策 |
+| `grammar-check` | 语法、逻辑和流程检查 |
+
+**命令**:
+- `/review-resume` — 全面 PM 简历审查
+- `/tailor-resume` — 针对职位定制简历
+- `/draft-nda` — 起草 NDA
+- `/privacy-policy` — 起草隐私政策
+- `/proofread` — 校对语法和逻辑
+
+---
+
+**技能来源**: 由 [The Product Compass Newsletter](https://www.productcompass.pm) 策划，基于 Teresa Torres、Marty Cagan、Alberto Savoia 等专家的作品。
 
 ---
 
